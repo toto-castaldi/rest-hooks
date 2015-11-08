@@ -1,0 +1,13 @@
+<Context path="/" reloadable="true" allowLinking="true" crossContext="true"  >
+
+    <Resource name="jdbc/scheduler" auth="Container" type="javax.sql.DataSource"
+              maxActive="30" maxIdle="20" maxWait="10000"
+              username="aws" password="aws" driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost/aws"/>
+
+    <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
+              maxActive="30" maxIdle="20" maxWait="10000"
+              username="aws" password="aws" driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost/aws"/>
+
+</Context>
