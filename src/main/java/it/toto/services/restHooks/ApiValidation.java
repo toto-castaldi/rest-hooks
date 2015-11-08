@@ -1,5 +1,6 @@
 package it.toto.services.restHooks;
 
+import it.toto.services.restHooks.model.CustomerEntity;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -11,16 +12,12 @@ public class ApiValidation {
 
     private static final String PWD_TOKEN = "13354-PWD";
 
-    public static boolean notNullAndBlank(String str) {
-        return str != null && StringUtils.isBlank(str);
-    }
-
-    public static boolean notNullAndinvalidCap(String cap) {
-        return cap != null && (StringUtils.length(cap) != 5 || !NumberUtils.isDigits(cap));
-    }
-
     static String getPassword(String username, String password) {
         return DigestUtils.md5Hex(password + PWD_TOKEN + username);
+    }
+
+    public static boolean validCustomerPassword(CustomerEntity user, String password) {
+        return StringUtils.equals(getPassword(user.getUsername(), password), user.getPassword());
     }
 
 }

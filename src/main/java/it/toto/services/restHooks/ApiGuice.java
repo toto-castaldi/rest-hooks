@@ -11,6 +11,9 @@ import it.toto.commons.ConfKey;
 import it.toto.commons.GuiceInjector;
 import it.toto.commons.MemoryShutdownableRepository;
 import it.toto.commons.ShutdownableRepository;
+import it.toto.services.restHooks.model.CustomerDao;
+import it.toto.services.restHooks.model.HardCodedCustomerDao;
+import it.toto.services.restHooks.request.BasicAuthorizationRequest;
 import it.toto.services.restHooks.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.*;
@@ -48,19 +51,14 @@ public class ApiGuice extends GuiceServletContextListener {
                         }
 
                         bind(ApiResponse.class);
+                        bind(UserProfile.class);
+                        bind(ApiHeaderUtils.class);
                         bind(ApiScheduler.class);
                         bind(Semaphore.class);
                         bind(TimeProvider.class);
                         bind(ShutdownableRepository.class).to(MemoryShutdownableRepository.class);
-                        //TODO: from external file
-                        bind(ApiConfiguration.class).toInstance(
-                                ApiConfiguration.of(
-                                        TimeUnit.MINUTES,
-                                        44L,
-                                        TimeUnit.MINUTES,
-                                        10L
-                                )
-                        );
+                        bind(CustomerDao.class).to(HardCodedCustomerDao.class);
+                        install(factoryModuleBuilder.build(BasicAuthorizationRequest.Factory.class));
 
                     }
                 },

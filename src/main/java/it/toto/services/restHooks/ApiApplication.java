@@ -1,7 +1,10 @@
 package it.toto.services.restHooks;
 
 import it.toto.commons.GuiceInjector;
+import it.toto.services.restHooks.filter.AuthenticationAndProfileRequestFilter;
+import it.toto.services.restHooks.filter.BasicAuthenticationAbortRequestFilter;
 import it.toto.services.restHooks.filter.CommonResponseHeaderFilter;
+import it.toto.services.restHooks.filter.ProfileCustomerAbortRequestFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.filter.LoggingFilter;
@@ -31,6 +34,10 @@ public class ApiApplication extends ResourceConfig {
         register(LoggingFilter.class);
 
         register(CommonResponseHeaderFilter.class);
+        register(AuthenticationAndProfileRequestFilter.class);
+        register(BasicAuthenticationAbortRequestFilter.class);
+        register(ProfileCustomerAbortRequestFilter.class);
+
 
         /** GUICE BRIDGE !!! **/
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);

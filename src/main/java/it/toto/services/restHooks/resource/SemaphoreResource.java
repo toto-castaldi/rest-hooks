@@ -1,15 +1,19 @@
 package it.toto.services.restHooks.resource;
 
+import it.toto.services.restHooks.ApiCurrentExecution;
 import it.toto.services.restHooks.ApiPath;
-import it.toto.services.restHooks.MissingHeaderException;
 import it.toto.services.restHooks.Semaphore;
+import it.toto.services.restHooks.annotation.BasicAuthenticated;
+import it.toto.services.restHooks.annotation.UserProfileCustomer;
 import it.toto.services.restHooks.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,7 +25,6 @@ import javax.ws.rs.core.Response;
 @Slf4j
 public class SemaphoreResource {
 
-    private static final String DEFAULT_APPLICATION = "app";
     private final ApiResponse apiResponse;
     private final Semaphore semaphore;
 
@@ -35,54 +38,53 @@ public class SemaphoreResource {
     }
 
     @POST
+    @UserProfileCustomer
+    @BasicAuthenticated
     @Path(ApiPath.ON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response on(
-            @Context HttpServletRequest httpServletRequest,
-            @HeaderParam("X-Mashape-Key") String mashapeKey
+            @Context HttpServletRequest httpServletRequest
     ) {
-        mashapeKey = StringUtils.defaultIfBlank(mashapeKey, DEFAULT_APPLICATION);
-        if (StringUtils.isBlank(mashapeKey)) throw new MissingHeaderException("X-Mashape-Key");
-        semaphore.on(mashapeKey);
+        final ApiCurrentExecution apiCurrentExecution = ApiCurrentExecution.on(httpServletRequest);
+        semaphore.on(apiCurrentExecution.getUsername().get());
         return apiResponse.createdReturns(httpServletRequest, ApiPath.SEMAPHORE);
     }
 
     @POST
+    @UserProfileCustomer
+    @BasicAuthenticated
     @Path(ApiPath.OFF)
     @Produces(MediaType.APPLICATION_JSON)
     public Response off(
-            @Context HttpServletRequest httpServletRequest,
-            @HeaderParam("X-Mashape-Key") String mashapeKey
+            @Context HttpServletRequest httpServletRequest
     ) {
-        mashapeKey = StringUtils.defaultIfBlank(mashapeKey, DEFAULT_APPLICATION);
-        if (StringUtils.isBlank(mashapeKey)) throw new MissingHeaderException("X-Mashape-Key");
-        semaphore.off(mashapeKey);
+        final ApiCurrentExecution apiCurrentExecution = ApiCurrentExecution.on(httpServletRequest);
+        semaphore.off(apiCurrentExecution.getUsername().get());
         return apiResponse.createdReturns(httpServletRequest, ApiPath.SEMAPHORE);
     }
 
     @POST
+    @UserProfileCustomer
+    @BasicAuthenticated
     @Path(ApiPath.SWITCH)
     @Produces(MediaType.APPLICATION_JSON)
     public Response switchState(
-            @Context HttpServletRequest httpServletRequest,
-            @HeaderParam("X-Mashape-Key") String mashapeKey
+            @Context HttpServletRequest httpServletRequest
     ) {
-        mashapeKey = StringUtils.defaultIfBlank(mashapeKey, DEFAULT_APPLICATION);
-        if (StringUtils.isBlank(mashapeKey)) throw new MissingHeaderException("X-Mashape-Key");
-        log.info("mashape key = {}", mashapeKey);
-        semaphore.switchState(mashapeKey);
+        final ApiCurrentExecution apiCurrentExecution = ApiCurrentExecution.on(httpServletRequest);
+        semaphore.switchState(apiCurrentExecution.getUsername().get());
         return apiResponse.createdReturns(httpServletRequest, ApiPath.SEMAPHORE);
     }
 
     @GET
+    @UserProfileCustomer
+    @BasicAuthenticated
     @Produces(MediaType.APPLICATION_JSON)
     public Response status(
-            @Context HttpServletRequest httpServletRequest,
-            @HeaderParam("X-Mashape-Key") String mashapeKey
+            @Context HttpServletRequest httpServletRequest
     ) {
-        mashapeKey = StringUtils.defaultIfBlank(mashapeKey, DEFAULT_APPLICATION);
-        if (StringUtils.isBlank(mashapeKey)) throw new MissingHeaderException("X-Mashape-Key");
-        return apiResponse.ok(semaphore.status(mashapeKey));
+        final ApiCurrentExecution apiCurrentExecution = ApiCurrentExecution.on(httpServletRequest);
+        return apiResponse.ok(semaphore.status(apiCurrentExecution.getUsername().get()));
     }
 
 }
