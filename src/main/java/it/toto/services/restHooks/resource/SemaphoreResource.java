@@ -6,14 +6,12 @@ import it.toto.services.restHooks.Semaphore;
 import it.toto.services.restHooks.annotation.BasicAuthenticated;
 import it.toto.services.restHooks.annotation.UserProfileCustomer;
 import it.toto.services.restHooks.response.ApiResponse;
+import it.toto.services.restHooks.response.SemaphoreStatusResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,7 +35,7 @@ public class SemaphoreResource {
         this.semaphore = semaphore;
     }
 
-    @POST
+    @PUT
     @UserProfileCustomer
     @BasicAuthenticated
     @Path(ApiPath.ON)
@@ -50,7 +48,7 @@ public class SemaphoreResource {
         return apiResponse.createdReturns(httpServletRequest, ApiPath.SEMAPHORE);
     }
 
-    @POST
+    @PUT
     @UserProfileCustomer
     @BasicAuthenticated
     @Path(ApiPath.OFF)
@@ -63,7 +61,7 @@ public class SemaphoreResource {
         return apiResponse.createdReturns(httpServletRequest, ApiPath.SEMAPHORE);
     }
 
-    @POST
+    @PUT
     @UserProfileCustomer
     @BasicAuthenticated
     @Path(ApiPath.SWITCH)
@@ -84,7 +82,7 @@ public class SemaphoreResource {
             @Context HttpServletRequest httpServletRequest
     ) {
         final ApiCurrentExecution apiCurrentExecution = ApiCurrentExecution.on(httpServletRequest);
-        return apiResponse.ok(semaphore.status(apiCurrentExecution.getUsername().get()));
+        return apiResponse.ok(SemaphoreStatusResponse.of(semaphore.status(apiCurrentExecution.getUsername().get())));
     }
 
 }
