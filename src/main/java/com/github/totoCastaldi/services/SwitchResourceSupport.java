@@ -1,4 +1,4 @@
-package it.toto.services.restHooks;
+package com.github.totoCastaldi.services;
 
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -13,13 +13,13 @@ import java.util.Map;
  */
 @Singleton
 @Slf4j
-public class Semaphore {
+public class SwitchResourceSupport {
 
     public static final boolean DEFAULT_STATE = true;
     private Map<String, Boolean> statuses = Maps.newConcurrentMap();
 
     @Inject
-    public Semaphore(
+    public SwitchResourceSupport(
     ) {
     }
 

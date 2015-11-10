@@ -1,9 +1,9 @@
-package it.toto.services.restHooks;
+package com.github.totoCastaldi.services;
 
 /**
  * Created by toto on 07/10/14.
  */
-public class ApiPath {
+public class SwitchResourceApiPath {
 
     private static final String SLASH = "/";
 

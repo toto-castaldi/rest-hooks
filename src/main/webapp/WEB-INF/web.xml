@@ -1,40 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <servlet>
-        <servlet-name>org.glassfish.jersey.servlet.ServletContainer</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>javax.ws.rs.Application</param-name>
-            <param-value>it.toto.services.restHooks.ApiApplication</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>org.glassfish.jersey.servlet.ServletContainer</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>
-    
-    
-    <filter>
-        <filter-name>com.google.inject.servlet.GuiceFilter</filter-name>
-        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
-        <async-supported>true</async-supported>
-    </filter>
 
-    <filter-mapping>
-        <filter-name>com.google.inject.servlet.GuiceFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <absolute-ordering>
+        <name>restServer</name>
+    </absolute-ordering>
 
     <listener>
-        <listener-class>it.toto.services.restHooks.ApiGuice</listener-class>
-    </listener>
-    <listener>
-        <listener-class>it.toto.services.restHooks.webapp.ShutdownContext</listener-class>
-    </listener>
-    <listener>
-        <listener-class>it.toto.services.restHooks.webapp.StartupContext</listener-class>
+        <listener-class>com.github.totoCastaldi.services.SwitchResourceApiGuice</listener-class>
     </listener>
 
 
