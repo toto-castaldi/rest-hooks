@@ -1,9 +1,9 @@
 package com.github.totoCastaldi.services;
 
-import it.toto.services.restServer.ApiCurrentExecution;
-import it.toto.services.restServer.annotation.BasicAuthenticated;
-import it.toto.services.restServer.annotation.UserProfileCustomer;
-import it.toto.services.restServer.response.ApiResponse;
+import com.github.totoCastaldi.restServer.ApiCurrentExecution;
+import com.github.totoCastaldi.restServer.annotation.BasicAuthenticated;
+import com.github.totoCastaldi.restServer.annotation.UserProfileCustomer;
+import com.github.totoCastaldi.restServer.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;

@@ -1,9 +1,9 @@
 package com.github.totoCastaldi.services;
 
+import com.github.totoCastaldi.restServer.ApiGuice;
+import com.github.totoCastaldi.restServer.model.CustomerDao;
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
-import it.toto.services.restServer.ApiGuice;
-import it.toto.services.restServer.model.CustomerDao;
 
 /**
  * Created by toto on 09/11/15.
@@ -12,6 +12,11 @@ import it.toto.services.restServer.model.CustomerDao;
 public class SwitchResourceApiGuice extends ApiGuice {
 
     public SwitchResourceApiGuice() {
+    }
+
+    @Override
+    protected Package getPackage() {
+        return SwitchResource.class.getPackage();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.github.totoCastaldi.services;
 
+import com.github.totoCastaldi.restServer.model.CustomerDao;
+import com.github.totoCastaldi.restServer.model.CustomerEntity;
 import com.google.common.base.Optional;
-import it.toto.services.restServer.model.CustomerDao;
-import it.toto.services.restServer.model.CustomerEntity;
 import org.apache.commons.lang.StringUtils;
 
 /**
