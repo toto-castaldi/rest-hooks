@@ -29,13 +29,21 @@
 
       <div class="row">
         <div class="col-lg-6">
-          <h4>Sign up</h4>
-          <form id="signup" >
-              <label>Email *</label><input type="text" name="email" />
-              <label>Password *</label><input type="password" name="password" />
-              <input type="submit" name="signup" />
+          <div id="links">
+            <h4>Choose</h4>
+            <ul>
+              <li><a href="#signup">Signup</a></li>
+            </ul>
+          </div>
+          <div id="signup" class="hidden">
+            <h4>Sign up</h4>
+            <form>
+                <label>Email *</label><input type="text" name="email" />
+                <label>Password *</label><input type="password" name="password" />
+                <input type="submit" name="signup" />
+            </form>
+          </div>
 
-          </form>
 
         </div>
       </div>
