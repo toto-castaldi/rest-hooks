@@ -1,5 +1,7 @@
 'use strict';
 
+/*globals notie */
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
@@ -49,7 +51,24 @@ $().ready(
     				}),
     				success: function (response) {
     					trace(response);
+              notie.alert(1, 'Success! You are confirmed', 1.5);
     				},
+            error : function (XMLHttpRequest, textStatus, errorThrown) {
+              trace('error', XMLHttpRequest, textStatus, errorThrown);
+
+              if (XMLHttpRequest.readyState === 4) {
+                    // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+                    notie.alert(3, 'Error (' + XMLHttpRequest.status + ', ' + XMLHttpRequest.statusText + ')', 5);
+                }
+                else if (XMLHttpRequest.readyState === 0) {
+                    // Network error (i.e. connection refused, access denied due to CORS, etc.)
+                    notie.alert(3, 'Network Error', 5);
+                }
+                else {
+                    // something weird is happening
+                    notie.alert(3, 'Error !', 5);
+                }
+            },
     				contentType:'application/json;charset=UTF-8',
     			  	dataType: 'json'
     			});
@@ -72,6 +91,8 @@ $().ready(
       			var email = $('#signup form input[name=email]').val();
       			var password = $('#signup form input[name=password]').val();
 
+            $('#signup form input[type=submit]').isLoading("");
+
       			$.ajax({
               timeout: 20000,
               cache : false,
@@ -85,16 +106,19 @@ $().ready(
       				}),
       				success: function (response) {
       					trace(response);
+                notie.alert(1, 'Success! Check you email', 1.5);
+                $('#signup form input[type=submit]').isLoading("hide");
       					$('#signup').addClass('hidden');
       				},
               error : function (XMLHttpRequest, textStatus, errorThrown) {
                 trace('error', XMLHttpRequest, textStatus, errorThrown);
+                $('#signup form input[type=submit]').isLoading("hide");
 
-                if (XMLHttpRequest.readyState == 4) {
+                if (XMLHttpRequest.readyState === 4) {
                       // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
                       notie.alert(3, 'Error (' + XMLHttpRequest.status + ', ' + XMLHttpRequest.statusText + ')', 5);
                   }
-                  else if (XMLHttpRequest.readyState == 0) {
+                  else if (XMLHttpRequest.readyState === 0) {
                       // Network error (i.e. connection refused, access denied due to CORS, etc.)
                       notie.alert(3, 'Network Error', 5);
                   }
