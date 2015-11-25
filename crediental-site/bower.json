@@ -2,7 +2,7 @@
   "name": "crediental-site",
   "private": false,
   "dependencies": {
-    "bootstrap": "~3.3.6",
+    "bootstrap": "3.3.4",
     "jquery-validation": "~1.14.0",
     "notie": "*",
     "is-loading": "~1.0.6"

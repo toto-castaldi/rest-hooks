@@ -91,7 +91,7 @@ $().ready(
       			var email = $('#signup form input[name=email]').val();
       			var password = $('#signup form input[name=password]').val();
 
-            $('#signup form input[type=submit]').isLoading("");
+            $('#signup form input[type=submit]').isLoading('');
 
       			$.ajax({
               timeout: 20000,
@@ -107,12 +107,12 @@ $().ready(
       				success: function (response) {
       					trace(response);
                 notie.alert(1, 'Success! Check you email', 1.5);
-                $('#signup form input[type=submit]').isLoading("hide");
+                $('#signup form input[type=submit]').isLoading('hide');
       					$('#signup').addClass('hidden');
       				},
               error : function (XMLHttpRequest, textStatus, errorThrown) {
                 trace('error', XMLHttpRequest, textStatus, errorThrown);
-                $('#signup form input[type=submit]').isLoading("hide");
+                $('#signup form input[type=submit]').isLoading('hide');
 
                 if (XMLHttpRequest.readyState === 4) {
                       // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
