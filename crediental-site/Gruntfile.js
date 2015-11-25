@@ -24,7 +24,9 @@ module.exports = function (grunt) {
       protocol  : 'http',
       host    : 'localhost',
       port    : ':8080',
-      context   : '/'
+      context   : '/',
+      log     : true
+
     }
   };
 

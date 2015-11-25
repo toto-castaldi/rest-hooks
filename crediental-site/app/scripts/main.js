@@ -20,6 +20,12 @@ $().ready(
     			return config.protocol + '://' + config.host + config.port + config.context + resourceName;
     		};
 
+        var trace = function () {
+          if (config.log) {
+            console.log(arguments);
+          }
+        };
+
 
     		$('#links a[href=#signup]').click(function () {
     			$('#signup').removeClass('hidden');
@@ -33,7 +39,7 @@ $().ready(
     			var email = getParameterByName('e');
     			var token = getParameterByName('t');
 
-    			console.log('confirm ' + email + ' with token ' + token);
+    			trace('confirm ' + email + ' with token ' + token);
 
     			$.ajax({
     				type: 'PUT',
@@ -42,7 +48,7 @@ $().ready(
     				    'email' : email
     				}),
     				success: function (response) {
-    					console.log(response);
+    					trace(response);
     				},
     				contentType:'application/json;charset=UTF-8',
     			  	dataType: 'json'
@@ -67,6 +73,8 @@ $().ready(
       			var password = $('#signup form input[name=password]').val();
 
       			$.ajax({
+              timeout: 20000,
+              cache : false,
       				type: 'POST',
       				url: buildUrl('user'),
       				data: JSON.stringify({
@@ -76,11 +84,27 @@ $().ready(
       				    'skipEmailSend' : false
       				}),
       				success: function (response) {
-      					console.log(response);
+      					trace(response);
       					$('#signup').addClass('hidden');
       				},
+              error : function (XMLHttpRequest, textStatus, errorThrown) {
+                trace('error', XMLHttpRequest, textStatus, errorThrown);
+
+                if (XMLHttpRequest.readyState == 4) {
+                      // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+                      notie.alert(3, 'Error (' + XMLHttpRequest.status + ', ' + XMLHttpRequest.statusText + ')', 5);
+                  }
+                  else if (XMLHttpRequest.readyState == 0) {
+                      // Network error (i.e. connection refused, access denied due to CORS, etc.)
+                      notie.alert(3, 'Network Error', 5);
+                  }
+                  else {
+                      // something weird is happening
+                      notie.alert(3, 'Error !', 5);
+                  }
+              },
       				contentType:'application/json;charset=UTF-8',
-      			  	dataType: 'json'
+      			  dataType: 'json'
       			});
           }
     			event.preventDefault();
