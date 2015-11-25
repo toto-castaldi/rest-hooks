@@ -19,7 +19,13 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist',
+    clientClonfig : {
+      protocol  : 'http',
+      host    : 'localhost',
+      port    : ':8080',
+      context   : '/'
+    }
   };
 
   // Define the configuration for all the tasks
@@ -79,7 +85,10 @@ module.exports = function (grunt) {
             return [
               connect.static('.tmp'),
               connect().use('/bower_components', connect.static('./bower_components')),
-              connect.static(config.app)
+              connect.static(config.app),
+              connect().use('/config', function(req, res) {
+                res.end(JSON.stringify(config.clientClonfig));
+              })
             ];
           }
         }
@@ -384,7 +393,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
+    //'test',
     'build'
   ]);
 };
