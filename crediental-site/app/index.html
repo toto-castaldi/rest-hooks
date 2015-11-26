@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>crediental site</title>
+    <title>switch resource</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -24,7 +24,7 @@
 
     <div class="container">
       <div class="header">
-        <h3 class="text-muted">Switch Resource Site</h3>
+        <h3 class="text-muted">Switch Resource</h3>
       </div>
 
       <div class="row">
@@ -33,30 +33,123 @@
             <ul>
               <li><a href="#signup">Signup</a></li>
               <li><a href="#password-lost">Password Lost</a></li>
+              <li><a href="#change-password">Change Password</a></li>
             </ul>
           </div>
           <div id="signup" class="subsection" style="display: none" >
-            <h4>Sign up</h4>
-            <form >
-                <label>Email *</label><input type="email" name="email" />
-                <label>Password *</label><input type="password" name="password" />
-                <input type="submit" value="signup" />
+            <form class="form-horizontal">
+              <fieldset>
+              <legend>Sign up</legend>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email *</label>
+                <div class="col-md-4">
+                <input name="email" type="email" placeholder="email" class="form-control input-md" required="">
+                <span class="help-block">Insert your email</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Password *</label>
+                <div class="col-md-4">
+                <input name="password" type="password" placeholder="password" class="form-control input-md" required="">
+                <span class="help-block">Choose your password</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="signup"></label>
+                <div class="col-md-4">
+                  <button name="submit" class="btn btn-default">Signup</button>
+                </div>
+              </div>
+
+              </fieldset>
             </form>
           </div>
           <div id="password-lost" class="subsection" style="display: none">
-            <h4>Password Lost</h4>
-            <form >
-                <label>Email *</label><input type="email" name="email" />
-                <input type="submit" value="password lost" />
+            <form class="form-horizontal">
+              <fieldset>
+              <legend>Password Lost</legend>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email *</label>
+                <div class="col-md-4">
+                <input name="email" type="email" placeholder="email" class="form-control input-md" required="">
+                <span class="help-block">Insert your email</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="signup"></label>
+                <div class="col-md-4">
+                  <button name="submit" class="btn btn-default">Password lost</button>
+                </div>
+              </div>
+
+              </fieldset>
             </form>
           </div>
           <div id="reset-password" class="subsection" style="display: none">
-            <h4>Reset Password</h4>
-            <form >
-                <input type="hidden" name="email" />
-                <input type="hidden" name="token" />
-                <label>Password *</label><input type="password" name="password" />
-                <input type="submit" value="reset password" />
+            <form class="form-horizontal">
+              <input type="hidden" name="email" />
+              <input type="hidden" name="token" />
+              <fieldset>
+              <legend>Reset Password</legend>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Password *</label>
+                <div class="col-md-4">
+                <input name="password" type="password" placeholder="password" class="form-control input-md" required="">
+                <span class="help-block">Choose your password</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="signup"></label>
+                <div class="col-md-4">
+                  <button name="submit" class="btn btn-default">Reset Password</button>
+                </div>
+              </div>
+
+              </fieldset>
+            </form>
+          </div>
+          <div id="change-password" class="subsection" style="display: none">
+            <form class="form-horizontal">
+              <fieldset>
+              <legend>Change Password</legend>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email *</label>
+                <div class="col-md-4">
+                <input name="email" type="email" placeholder="email" class="form-control input-md" required="">
+                <span class="help-block">Insert your email</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Old Password *</label>
+                <div class="col-md-4">
+                <input name="new-password" type="password" placeholder="password" class="form-control input-md" required="">
+                <span class="help-block">Your actual password</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">New Password *</label>
+                <div class="col-md-4">
+                <input name="old-password" type="password" placeholder="password" class="form-control input-md" required="">
+                <span class="help-block">Choose your new password</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="signup"></label>
+                <div class="col-md-4">
+                  <button name="submit" class="btn btn-default">Change Password</button>
+                </div>
+              </div>
+
+              </fieldset>
             </form>
           </div>
         </div>

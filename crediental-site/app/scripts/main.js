@@ -29,11 +29,11 @@ $().ready(
         };
 
         var formLoading = function (subSectionId) {
-          $('#' + subSectionId + ' form input[type=submit]').isLoading('');
+          $('#' + subSectionId + ' form button[name=submit]').isLoading({'tpl': '<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ></span>'});
         };
 
         var formLoaded = function (subSectionId) {
-          $('#' + subSectionId + ' form input[type=submit]').isLoading('hide');
+          $('#' + subSectionId + ' form button[name=submit]').isLoading('hide');
         };
 
         var openSubSection = function (subSectionId) {
@@ -237,6 +237,53 @@ $().ready(
                 closeAllSubsection();
       				},
               error : genericError('password-lost'),
+      				contentType:'application/json;charset=UTF-8',
+      			  dataType: 'json'
+      			});
+          }
+    			event.preventDefault();
+    		});
+
+        //change password
+        $('#change-password form').validate({
+          rules : {
+            email : {
+              required : true,
+              email : true
+            },
+            'old-password' : {
+              required : true
+            },
+            'new-password' : {
+              required : true
+            }
+          }
+        });
+
+    		$('#change-password form').submit(function( event ) {
+          if ($(event.target).valid()) {
+      			var email = $('#change-password form input[name=email]').val();
+      			var oldPassword = $('#change-password form input[name=old-password]').val();
+      			var newPassword = $('#change-password form input[name=new-password]').val();
+
+            formLoading('change-password');
+
+      			$.ajax({
+              timeout: 20000,
+              cache : false,
+      				type: 'PUT',
+      				url: buildUrl('user/' + email),
+      				data: JSON.stringify({
+      				    'oldPassword' : oldPassword,
+      				    'newPassword' : newPassword
+      				}),
+      				success: function (response) {
+      					trace(response);
+                notie.alert(1, 'Password changed', 1.5);
+                formLoaded('change-password');
+                closeAllSubsection();
+      				},
+              error : genericError('change-password'),
       				contentType:'application/json;charset=UTF-8',
       			  dataType: 'json'
       			});
