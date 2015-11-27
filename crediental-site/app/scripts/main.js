@@ -16,7 +16,7 @@ $().ready(
   function () {
     $.ajax({
     	type: 'GET',
-    	url: '/config',
+    	url: 'config',
     	success: function (config) {
     		var buildUrl = function (resourceName) {
     			return config.protocol + '://' + config.host + config.port + config.context + resourceName;
