@@ -21,14 +21,15 @@ module.exports = function (grunt) {
     app: 'app',
     dist: 'dist',
     clientClonfig : {
-      protocol  : 'http',
-      host    : 'localhost',
-      port    : ':8080',
-      context   : '/',
-      log     : true
+      protocol      : 'http',
+      host          : 'localhost',
+      port          : ':8080',
+      context       : '/',
+      log           : true,
+      X_Mashape_Key : 'mashape-key'
     }
   };
-
+  
   // Define the configuration for all the tasks
   grunt.initConfig({
 

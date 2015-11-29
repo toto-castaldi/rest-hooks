@@ -141,6 +141,9 @@ $().ready(
               cache : false,
       				type: 'PUT',
       				url: buildUrl('lostToken/' + token),
+              headers: {
+                "X-Mashape-Key": config.X_Mashape_Key
+              },
       				data: JSON.stringify({
       				    'email' : email,
       				    'password' : password
@@ -184,6 +187,9 @@ $().ready(
               cache : false,
       				type: 'POST',
       				url: buildUrl('user'),
+              headers: {
+                "X-Mashape-Key": config.X_Mashape_Key
+              },
       				data: JSON.stringify({
       				    'email' : email,
       				    'password' : password,
@@ -225,6 +231,9 @@ $().ready(
               cache : false,
       				type: 'POST',
       				url: buildUrl('lostToken'),
+              headers: {
+                "X-Mashape-Key": config.X_Mashape_Key
+              },
       				data: JSON.stringify({
       				    'email' : email,
       				    'baseUrl' :  document.location.protocol + '//' + document.location.host + document.location.pathname + '#reset-password',
@@ -273,6 +282,9 @@ $().ready(
               cache : false,
       				type: 'PUT',
       				url: buildUrl('user/' + email),
+              headers: {
+                "X-Mashape-Key": config.X_Mashape_Key
+              },
       				data: JSON.stringify({
       				    'oldPassword' : oldPassword,
       				    'newPassword' : newPassword
