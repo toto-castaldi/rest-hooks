@@ -1,7 +1,8 @@
 {
-      "protocol"  : "http",
-      "host"    : "rest-resource.elasticbeanstalk.com",
-      "port"    : ":80",
+      "protocol"  : "https",
+      "host"    : "toto-credential-v1.p.mashape.com",
+      "port"    : ":443",
       "context"   : "/",
-      "log"     : true
+      "log"     : true,
+	"xMashapeKey" : "FCKFcesv9PmshjpunUVhQVx88GI7p1HDYROjsnTmJ45NAYWEnd"
 }

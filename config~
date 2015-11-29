@@ -1,0 +1,7 @@
+{
+      "protocol"  : "http",
+      "host"    : "rest-resource.elasticbeanstalk.com",
+      "port"    : ":80",
+      "context"   : "/",
+      "log"     : true
+}
