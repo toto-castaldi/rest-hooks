@@ -2,13 +2,15 @@ package com.github.totoCastaldi.services;
 
 import com.github.totoCastaldi.restServer.ApiCurrentExecution;
 import com.github.totoCastaldi.restServer.annotation.BasicAuthenticated;
-import com.github.totoCastaldi.restServer.annotation.UserProfileCustomer;
 import com.github.totoCastaldi.restServer.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,7 +35,6 @@ public class SwitchResource {
     }
 
     @PUT
-    @UserProfileCustomer
     @BasicAuthenticated
     @Path(SwitchResourceApiPath.ON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,7 +47,6 @@ public class SwitchResource {
     }
 
     @PUT
-    @UserProfileCustomer
     @BasicAuthenticated
     @Path(SwitchResourceApiPath.OFF)
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +59,6 @@ public class SwitchResource {
     }
 
     @PUT
-    @UserProfileCustomer
     @BasicAuthenticated
     @Path(SwitchResourceApiPath.SWITCH)
     @Produces(MediaType.APPLICATION_JSON)
@@ -72,7 +71,6 @@ public class SwitchResource {
     }
 
     @GET
-    @UserProfileCustomer
     @BasicAuthenticated
     @Produces(MediaType.APPLICATION_JSON)
     public Response status(

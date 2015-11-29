@@ -24,15 +24,25 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.toto-castaldi.services.restServer</groupId>
-            <artifactId>core</artifactId>
-            <version>1.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.5</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.toto-castaldi.services.restServer</groupId>
+            <artifactId>core</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.toto-castaldi.services.restServer</groupId>
+            <artifactId>plugin-mashape</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
