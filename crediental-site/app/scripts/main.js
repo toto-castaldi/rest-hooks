@@ -90,6 +90,9 @@ $().ready(
       			$.ajax({
       				type: 'PUT',
       				url: buildUrl('confirmToken') + '/' + token,
+              headers: {
+                'X-Mashape-Key': config.xMashapeKey
+              },
       				data: JSON.stringify({
       				    'email' : email
       				}),
@@ -142,7 +145,7 @@ $().ready(
       				type: 'PUT',
       				url: buildUrl('lostToken/' + token),
               headers: {
-                "X-Mashape-Key": config.X_Mashape_Key
+                'X-Mashape-Key': config.xMashapeKey
               },
       				data: JSON.stringify({
       				    'email' : email,
@@ -188,7 +191,7 @@ $().ready(
       				type: 'POST',
       				url: buildUrl('user'),
               headers: {
-                "X-Mashape-Key": config.X_Mashape_Key
+                'X-Mashape-Key': config.xMashapeKey
               },
       				data: JSON.stringify({
       				    'email' : email,
@@ -232,7 +235,7 @@ $().ready(
       				type: 'POST',
       				url: buildUrl('lostToken'),
               headers: {
-                "X-Mashape-Key": config.X_Mashape_Key
+                'X-Mashape-Key': config.xMashapeKey
               },
       				data: JSON.stringify({
       				    'email' : email,
@@ -283,7 +286,7 @@ $().ready(
       				type: 'PUT',
       				url: buildUrl('user/' + email),
               headers: {
-                "X-Mashape-Key": config.X_Mashape_Key
+                'X-Mashape-Key': config.xMashapeKey
               },
       				data: JSON.stringify({
       				    'oldPassword' : oldPassword,
