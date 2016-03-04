@@ -31,10 +31,42 @@
         <div class="col-lg-6">
           <div id="links">
             <ul>
+              <li><a href="#check">Try Signin</a></li>
               <li><a href="#signup">Signup</a></li>
               <li><a href="#password-lost">Password Lost</a></li>
               <li><a href="#change-password">Change Password</a></li>
             </ul>
+          </div>
+          <div id="check" class="subsection" style="display: none" >
+            <form class="form-horizontal">
+              <fieldset>
+              <legend>Try Signin</legend>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email *</label>
+                <div class="col-md-4">
+                <input name="email" type="email" placeholder="email" class="form-control input-md" required="">
+                <span class="help-block">Insert your email</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Password *</label>
+                <div class="col-md-4">
+                <input name="password" type="password" placeholder="password" class="form-control input-md" required="">
+                <span class="help-block">Insert your password</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="signin"></label>
+                <div class="col-md-4">
+                  <button name="submit" class="btn btn-default">Signin</button>
+                </div>
+              </div>
+
+              </fieldset>
+            </form>
           </div>
           <div id="signup" class="subsection" style="display: none" >
             <form class="form-horizontal">

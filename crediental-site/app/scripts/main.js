@@ -22,6 +22,14 @@ $().ready(
     			return config.protocol + '://' + config.host + config.port + config.context + resourceName;
     		};
 
+        var mashape = function () {
+          if (config.mashape) {
+            return {
+              'X-Mashape-Key': config.xMashapeKey
+            };
+          }
+        };
+
         var trace = function () {
           if (config.log) {
             console.log(arguments);
@@ -90,9 +98,7 @@ $().ready(
       			$.ajax({
       				type: 'PUT',
       				url: buildUrl('confirmToken') + '/' + token,
-              headers: {
-                'X-Mashape-Key': config.xMashapeKey
-              },
+              headers: mashape(),
       				data: JSON.stringify({
       				    'email' : email
       				}),
@@ -144,9 +150,7 @@ $().ready(
               cache : false,
       				type: 'PUT',
       				url: buildUrl('lostToken/' + token),
-              headers: {
-                'X-Mashape-Key': config.xMashapeKey
-              },
+              headers: mashape(),
       				data: JSON.stringify({
       				    'email' : email,
       				    'password' : password
@@ -190,9 +194,7 @@ $().ready(
               cache : false,
       				type: 'POST',
       				url: buildUrl('user'),
-              headers: {
-                'X-Mashape-Key': config.xMashapeKey
-              },
+              headers: mashape(),
       				data: JSON.stringify({
       				    'email' : email,
       				    'password' : password,
@@ -234,9 +236,7 @@ $().ready(
               cache : false,
       				type: 'POST',
       				url: buildUrl('lostToken'),
-              headers: {
-                'X-Mashape-Key': config.xMashapeKey
-              },
+              headers: mashape(),
       				data: JSON.stringify({
       				    'email' : email,
       				    'baseUrl' :  document.location.protocol + '//' + document.location.host + document.location.pathname + '#reset-password',
@@ -285,9 +285,7 @@ $().ready(
               cache : false,
       				type: 'PUT',
       				url: buildUrl('user/' + email),
-              headers: {
-                'X-Mashape-Key': config.xMashapeKey
-              },
+              headers: mashape(),
       				data: JSON.stringify({
       				    'oldPassword' : oldPassword,
       				    'newPassword' : newPassword
@@ -299,6 +297,70 @@ $().ready(
                 closeAllSubsection();
       				},
               error : genericError('change-password'),
+      				contentType:'application/json;charset=UTF-8',
+      			  dataType: 'json'
+      			});
+          }
+    			event.preventDefault();
+    		});
+
+        //try signing
+        $('#check form').validate({
+          rules : {
+            email : {
+              required : true,
+              email : true
+            },
+            'password' : {
+              required : true
+            }
+          }
+        });
+
+    		$('#check form').submit(function( event ) {
+          if ($(event.target).valid()) {
+      			var email = $('#check form input[name=email]').val();
+      			var password = $('#check form input[name=password]').val();
+
+            formLoading('check');
+
+      			$.ajax({
+              timeout: 20000,
+              cache : false,
+      				type: 'GET',
+      				url: buildUrl('user/' + email + '/' + password),
+              headers: mashape(),
+      				success: function (response) {
+      					trace(response);
+                notie.alert(1, 'Login OK', 1.5);
+                formLoaded('check');
+                closeAllSubsection();
+      				},
+              error : function (XMLHttpRequest, textStatus, errorThrown) {
+                var subSectionId = 'check';
+                trace('error', XMLHttpRequest, textStatus, errorThrown);
+                if (subSectionId) {
+                  formLoaded(subSectionId);
+                }
+
+                if (XMLHttpRequest.status === 404) {
+                  notie.alert(3, 'Wrong username or password', 5);
+                } else if (XMLHttpRequest.readyState === 4) {
+                      // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+                      notie.alert(3, 'Error (' + XMLHttpRequest.status + ', ' + XMLHttpRequest.statusText + ')', 5);
+                  }
+                  else if (XMLHttpRequest.readyState === 0) {
+                      // Network error (i.e. connection refused, access denied due to CORS, etc.)
+                      notie.alert(3, 'Network Error', 5);
+                  }
+                  else {
+                      // something weird is happening
+                      notie.alert(3, 'Error !', 5);
+                  }
+
+
+
+              },
       				contentType:'application/json;charset=UTF-8',
       			  dataType: 'json'
       			});

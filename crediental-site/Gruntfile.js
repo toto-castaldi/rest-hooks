@@ -24,12 +24,13 @@ module.exports = function (grunt) {
       protocol      : 'http',
       host          : 'localhost',
       port          : ':8080',
-      context       : '/',
+      context       : '/credential/',
       log           : true,
-      xMashapeKey   : 'mashape-key'
+      xMashapeKey   : 'setit',
+      mashape       : false
     }
   };
-  
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
