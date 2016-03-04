@@ -4,5 +4,6 @@
       "port"    : ":443",
       "context"   : "/",
       "log"     : true,
-	"xMashapeKey" : "FCKFcesv9PmshjpunUVhQVx88GI7p1HDYROjsnTmJ45NAYWEnd"
+	"xMashapeKey" : "FCKFcesv9PmshjpunUVhQVx88GI7p1HDYROjsnTmJ45NAYWEnd",
+	"mashape" : true
 }
